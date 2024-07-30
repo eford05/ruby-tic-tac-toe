@@ -5,7 +5,7 @@ module GameBoard
     def initialize(board)
       @board = board
 
-      #Generating the board as a new obj from the class
+      # Generating the board as a new obj from the class
       @board = Hash.new
         for i in 0..2
           for j in 0..2
@@ -13,7 +13,7 @@ module GameBoard
           end
         end
     
-    #End Constructor
+    # End Constructor
     end
   
     # Generate a preview of the game board with coordinates for the player's to choose from
@@ -24,20 +24,20 @@ module GameBoard
         end
       end
 
-    #end method
+    # end method
     end
 
     # Set the game board with coordinates for player choices (Setter)
     def set_game_piece ( player, x, y )
       piece_set = false
 
-      #Player 1
+      # Player 1
       if player == 1
         # If there is an empty space on the board set the game piece else do nothing
         ( @board["#{x}#{y}"] == nil ) ? piece_set = true : nil
         ( @board["#{x}#{y}"] == nil ) ? ( @board["#{x}#{y}"] = "X" ) : nil
         
-      #Player 2
+      # Player 2
       else
         # If there is an empty space on the board set the game piece else do nothing
         ( @board["#{x}#{y}"] == nil ) ? piece_set = true : nil
@@ -46,10 +46,10 @@ module GameBoard
       end
 
       return piece_set
-    #end method
+    # end method
     end
 
-    #Draw the Game board (Getter)
+    # Draw the Game board (Getter)
     def draw_board 
       for i in 0..2
         for j in 0..2
@@ -61,7 +61,7 @@ module GameBoard
         end
       end
 
-    #end method
+    # end method
     end 
   
   # End class
