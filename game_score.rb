@@ -4,7 +4,6 @@ module GameScore
 
     # Check all player's current moves
     def game_win ( moves )
-      win = false
 
       # If the players moves are less than 3 then return false not enough for a win
       if moves.length < 3
@@ -13,17 +12,12 @@ module GameScore
       else
 
         # Check the players moves against the possible win conditions
-        # Idea to flatten moves and the inner arrays of @@possible_moves
-
         @@possible_moves.each do | move |
-          print move.flatten
-          print moves.flatten == move.flatten
-          puts
+          return ( moves.flatten == move.flatten ) ? ( true ) : ( false )
+
         end
 
       end
-
-      #return win
     
     # End method
     end
