@@ -12,6 +12,21 @@ module GameBoard
           end
         end
       end
-  end
+
+      # Generate a hash of values for the board every new game
+      def generate_board
+        board = Hash.new
+        for i in 0..2
+          for j in 0..2
+            board["#{i}#{j}"] = nil
+          end
+        end
+
+        return board
+      end
+
   
+  # End class
+  end
+# End module 
 end
