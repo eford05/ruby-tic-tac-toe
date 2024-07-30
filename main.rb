@@ -11,9 +11,12 @@ end
 def game_start
   puts "Directions: Take turns placing a marker on one of the coordinates. The first player to get 3 in a row wins."
   preview_board
+
+  # Play game until there is a winner or there are no more turns
 end
 
 # Test draw board with coordinates for choices
+# Will need to change logic so that it takes an array or hash of the players coordinates
 def draw_board ( player, x, y )
   for i in 0..2
     for j in 0..2
