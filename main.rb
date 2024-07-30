@@ -13,4 +13,35 @@ def game_start
   preview_board
 end
 
-game_start
+# Test draw board with coordinates for choices
+def draw_board ( player, x, y )
+  for i in 0..2
+    for j in 0..2
+
+      # Draw board for player 1 game board
+      if player == 1
+        if j != 2
+          ( i == x && j == y ) ? ( print "| X " ) : ( print "|   " )
+        else
+          ( i == x && j == y ) ? ( print "| X |" ) : ( print "|   | \n" )
+        end
+
+      # Draw board for player 2 game board
+      else
+        if j != 2
+          ( i == x && j == y ) ? ( print "| O " ) : ( print "|   " )
+        else
+          ( i == x && j == y ) ? ( print "| O |" ) : ( print "|   | \n" )
+        end
+
+      end
+
+    end
+
+  end
+
+  #end method
+end
+
+# Test
+draw_board(1, 0, 0)
