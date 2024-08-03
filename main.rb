@@ -5,19 +5,23 @@ include GameBoard
 include GameScore
 include Player
 
-# Helper Function to check if player entered coordinates
-def input_valid_coords (input)
+# Helper function to compare coord values
+def has_valid_coords( coords )
   has_coords = false
-  # If the string is less or more than 2 characters for coordinates return false
-  if ( input.length != 2 ) 
-    return false
-  end
-  
-  # Loop over the character check if the class is a number and in the range 0 to 3
-  input.each_char { | c | 
-    puts "Character #{c} : #{ ( (0..2).include?(c.to_i) )} "
 
-  }
+  if ( coords.length != 2 )
+    return false
+  else
+    #Check to see if the Ascii value is in range 
+    coords.each_char { | c |
+    (48..50).cover?(c.ord) ? has_coords = true : has_coords = false
+    if !has_coords
+      return false
+    end
+    }
+  end
+
+  return has_coords
 
 # End method
 end
@@ -46,11 +50,17 @@ def play_game
     # Keep getting player's coordinates until they pass in a valid coordinates
     while ( !has_coords ) do
       print "Player 1 what's your move? "
+      #Strip commas and white space replace with empty string
       player_input = gets.gsub(/[, \s]/, "").strip
 
-      input_valid_coords(player_input)
       # Break condition
-      has_coords = true
+      has_coords = has_valid_coords(player_input)
+
+      if has_coords
+        puts "Everything good"
+      else 
+        puts "Redo play"
+      end
     
     end
 
