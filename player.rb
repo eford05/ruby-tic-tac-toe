@@ -6,8 +6,8 @@ module Player
     @@player_moves = Array.new
 
     # Push the player's moves to the player moves array
-    def move (x, y)
-      player_moves.push("#{x}#{y}")
+    def move (xy)
+      @@player_moves.push("#{xy}")
     
     # End method
     end

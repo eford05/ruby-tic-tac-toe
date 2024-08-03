@@ -27,20 +27,20 @@ module GameBoard
     end
 
     # Set the game board with coordinates for player choices (Setter)
-    def set_game_piece ( player, x, y )
+    def set_game_piece ( player, xy )
       piece_set = false
 
       # Player 1
       if player == 1
         # If there is an empty space on the board set the game piece else do nothing
-        ( @@board["#{x}#{y}"] == nil ) ? piece_set = true : nil
-        ( @@board["#{x}#{y}"] == nil ) ? ( @@board["#{x}#{y}"] = "X" ) : nil
+        ( @@board["#{xy}"] == nil ) ? piece_set = true : nil
+        ( @@board["#{xy}"] == nil ) ? ( @@board["#{xy}"] = "X" ) : nil
         
       # Player 2
       else
         # If there is an empty space on the board set the game piece else do nothing
-        ( @@board["#{x}#{y}"] == nil ) ? piece_set = true : nil
-        ( @@board["#{x}#{y}"] == nil ) ? ( @@board["#{x}#{y}"] = "O" ) : nil
+        ( @@board["#{xy}"] == nil ) ? piece_set = true : nil
+        ( @@board["#{xy}"] == nil ) ? ( @@board["#{xy}"] = "O" ) : nil
 
       end
 
@@ -48,7 +48,7 @@ module GameBoard
     # End method
     end
 
-    # Draw the Game board (Getter)
+    # Draw the Game board
     def draw_board 
       for i in 0..2
         for j in 0..2
@@ -62,6 +62,10 @@ module GameBoard
 
     # End method
     end 
+
+    def get_board 
+      return @@board
+    end
   
   # End class
   end
