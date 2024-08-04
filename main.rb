@@ -119,6 +119,6 @@ end
 
 score = GameScore::Score.new
 
-player_guesses = ["11","01","21"]
+player_guesses = ["21", "22", "12", "20"]
 
-puts score.game_win(player_guesses)
+score.game_win(player_guesses)
