@@ -98,16 +98,13 @@ def play_game
   board.draw_board
   
   # Play game until there is a winner or there are no more turns
-  while ( !game_over || counter == 0 ) do  
+  while ( counter > 0 ) do  
 
     # Player 1 turns
     game_over = player_turns(player_one, board, score)
 
-    # Draw the board
-    board.draw_board
-
     # Game does not end on game break even though condition met so extra measure
-    (game_over) ? break : nil
+    (game_over) ? break : board.draw_board
 
     # Count down
     counter -= 1
@@ -115,11 +112,8 @@ def play_game
     # Player 2 turns
     game_over = player_turns(player_two, board, score)
 
-    # Draw the board
-    board.draw_board
-
     # Game does not end on game break even though condition met so extra measure
-    (game_over) ? break : nil
+    (game_over) ? break : board.draw_board
 
     # Count down 
     counter -= 1
