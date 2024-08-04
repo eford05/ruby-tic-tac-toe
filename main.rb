@@ -117,4 +117,8 @@ def play_game
 # End method
 end
 
-play_game
+score = GameScore::Score.new
+
+player_guesses = ["11","01","21"]
+
+puts score.game_win(player_guesses)
