@@ -62,6 +62,7 @@ end
 
 # Run Game Logic 
 def play_game
+  score = GameScore::Score.new
   game_over = false
   counter = 9
 
@@ -84,41 +85,53 @@ def play_game
     #Get player input for player 1
     player1_input = get_player_input(1, board)
     #Set player move
-    player_one.move(player1_input)
-
-    #Test Read player move array
-    puts player_one.player_moves
+    player_one.move("#{player1_input}")
 
     #Set the piece to the board
     board.set_game_piece(1, player1_input)
 
-    #Check for win
+    #Check for player 1 win
+    # game_over = score.game_win(1, player_one.get_moves)
+
+    # Test Player Moves array
+    puts "Player one moves class #{player_one.get_moves.class}"
+    puts "Player one array: #{player_one.get_moves}"
+
+    # Count down
+    counter -= 1
 
     #Get player input for player 2
     player2_input = get_player_input(2, board)
     #Set player move
-    player_two.move(player2_input)
+    player_two.move("#{player2_input}")
 
     #Set the piece to the board
     board.set_game_piece(2, player2_input)
 
-    #Test player move array
-    puts player_two.player_moves
+    #Check for player 2 win
+    # game_over = score.game_win(1, player_one.get_moves)
 
-    #Check for win
+    # Test Player Moves array
+    puts "Player one moves class #{player_two.get_moves.class}"
+    puts "Player one array: #{player_two.get_moves}"
 
-    
-    # Force game over for testing
-    game_over = true  
+    # Test Players moves array
+    puts "Players arrays: P1: #{player_one.get_moves}, P2: #{player_two.get_moves}"
+
+    # Count down 
+    counter -= 1
+
+    # End game bust
+    if ( counter == 0 ) && ( !game_over )
+      puts "Bust! No more moves!"
+    end
+
+    # Force game end
+    game_over = true
       
   end
-
 
 # End method
 end
 
-score = GameScore::Score.new
-
-player_guesses = ["20", "00", "21", "11", "02"]
-
-score.game_win(1, player_guesses)
+play_game
