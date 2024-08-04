@@ -103,8 +103,11 @@ def play_game
     # Player 1 turns
     game_over = player_turns(player_one, board, score)
 
+    #draw board
+    board.draw_board
+
     # Game does not end on game break even though condition met so extra measure
-    (game_over) ? break : board.draw_board
+    (game_over) ? break : nil
 
     # Count down
     counter -= 1
@@ -112,8 +115,11 @@ def play_game
     # Player 2 turns
     game_over = player_turns(player_two, board, score)
 
+    #draw board
+    board.draw_board
+
     # Game does not end on game break even though condition met so extra measure
-    (game_over) ? break : board.draw_board
+    (game_over) ? break : nil
 
     # Count down 
     counter -= 1
