@@ -1,19 +1,26 @@
 module Player
   class Player
 
-    @@player_moves = Array.new
+    # For some reason attr_reader for :name and :moves does not work
 
-    # Push the player's moves to the player moves array
-    def move(xy)
-      @@player_moves.push("#{xy}")
-    
-    # End method
+    # Initialize player moves
+    def initialize(name, moves)
+      @name = name
+      @moves = moves
     end
 
-    # Getter
+    # Setter and getters for player moves
     def get_moves
-      return @@player_moves
-    # End method
+      return @moves
+    end
+
+    def set_moves(move)
+      @moves = @moves.push(move)
+    end
+
+    # Getter for player name
+    def get_name
+      return @name
     end
 
   # End class

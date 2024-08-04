@@ -55,7 +55,7 @@ module GameBoard
           if j != 2
             ( @@board["#{i}#{j}"] == nil ) ? ( print "|   " ) : ( print "| #{@@board["#{i}#{j}"]} ")
           else
-            ( @@board["#{i}#{j}"] == nil ) ? ( print "|   | \n" ) : ( print "| #{@@board["#{i}#{j}"]} |")
+            ( @@board["#{i}#{j}"] == nil ) ? ( print "|   | \n" ) : ( print "| #{@@board["#{i}#{j}"]} | \n")
           end
         end
       end

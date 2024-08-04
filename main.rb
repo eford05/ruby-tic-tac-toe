@@ -14,7 +14,7 @@ def has_valid_coords( coords, board )
   else
     #Check to see if the Ascii value is in range 
     coords.each_char { | c |
-    (48..50).cover?(c.ord) ? has_coords = true : has_coords = false
+    ( 48..50 ).cover?( c.ord ) ? has_coords = true : has_coords = false
     if !has_coords
       
       # break out of loop send warning
@@ -24,11 +24,11 @@ def has_valid_coords( coords, board )
     }
 
     #One more check to see if the coordinates have already been placed on the board
-    ( board.get_board["#{coords}"] != nil ) ? has_coords = false : has_coords = true
+    ( board.get_board[ "#{coords}" ] != nil ) ? has_coords = false : has_coords = true
 
     if !has_coords
       print "Coordinates #{coords} have already been placed by "
-      (board.get_board["#{coords}"] == "X") ? (puts "player 1") : (puts "player 2")
+      ( board.get_board["#{coords}"] == "X" ) ? ( puts "player 1" ) : ( puts "player 2" )
       puts "Please enter coordinates that have not already been taken."
     end
   end
@@ -39,18 +39,18 @@ def has_valid_coords( coords, board )
 end
 
 # Helper method to get each players input until they have valid coords
-def get_player_input(player, board)
+def get_player_input( player, board )
   player_input = ""
   has_coords = false
 
   # Keep getting player's coordinates until they pass in a valid coordinates
   while ( !has_coords ) do
-    print "Player #{player} what's your move? "
+    print "Player #{ player } what's your move? "
     #Strip commas and white space replace with empty string
-    player_input = gets.gsub(/[, \s]/, "").strip
+    player_input = gets.gsub( /[, \s]/, "" ).strip
 
     # Break condition has valid coords
-    has_coords = has_valid_coords(player_input, board) 
+    has_coords = has_valid_coords( player_input, board ) 
   
   # End while
   end
@@ -60,17 +60,36 @@ def get_player_input(player, board)
 #End method
 end
 
+# Helper method to handle player turns
+def player_turns(player, board, score)
+  player_wins = false
+
+  # Get player input
+  player_input = get_player_input(player.get_name, board)
+  # Set player move
+  player.set_moves("#{player_input}")
+
+  # Set the piece to the board
+  board.set_game_piece(player.get_name, player_input)
+
+  # Check for player win
+  player_wins = score.game_win(player.get_name, player.get_moves)
+
+  return player_wins
+
+# End method
+end
+
 # Run Game Logic 
 def play_game
-  score = GameScore::Score.new
   game_over = false
   counter = 9
 
-  # Instantiate The Board
+  # Instantiate the board, score, players
   board = GameBoard::Board.new
-  win = GameScore::Score.new
-  player_one = Player::Player.new
-  player_two = Player::Player.new
+  score = GameScore::Score.new
+  player_one = Player::Player.new(1, [])
+  player_two = Player::Player.new(2, [])
 
   puts "Directions: Take turns placing a marker on one of the empty coordinates. The first player to get 3 in a row wins. \n"
   board.preview_board
@@ -79,44 +98,28 @@ def play_game
   board.draw_board
   
   # Play game until there is a winner or there are no more turns
-  while ( !game_over || counter == 0 ) do
-    has_coords = false    
+  while ( !game_over || counter == 0 ) do  
 
-    #Get player input for player 1
-    player1_input = get_player_input(1, board)
-    #Set player move
-    player_one.move("#{player1_input}")
+    # Player 1 turns
+    game_over = player_turns(player_one, board, score)
 
-    #Set the piece to the board
-    board.set_game_piece(1, player1_input)
+    # Draw the board
+    board.draw_board
 
-    #Check for player 1 win
-    # game_over = score.game_win(1, player_one.get_moves)
-
-    # Test Player Moves array
-    puts "Player one moves class #{player_one.get_moves.class}"
-    puts "Player one array: #{player_one.get_moves}"
+    # Game does not end on game break even though condition met so extra measure
+    (game_over) ? break : nil
 
     # Count down
     counter -= 1
 
-    #Get player input for player 2
-    player2_input = get_player_input(2, board)
-    #Set player move
-    player_two.move("#{player2_input}")
+    # Player 2 turns
+    game_over = player_turns(player_two, board, score)
 
-    #Set the piece to the board
-    board.set_game_piece(2, player2_input)
+    # Draw the board
+    board.draw_board
 
-    #Check for player 2 win
-    # game_over = score.game_win(1, player_one.get_moves)
-
-    # Test Player Moves array
-    puts "Player one moves class #{player_two.get_moves.class}"
-    puts "Player one array: #{player_two.get_moves}"
-
-    # Test Players moves array
-    puts "Players arrays: P1: #{player_one.get_moves}, P2: #{player_two.get_moves}"
+    # Game does not end on game break even though condition met so extra measure
+    (game_over) ? break : nil
 
     # Count down 
     counter -= 1
@@ -125,9 +128,6 @@ def play_game
     if ( counter == 0 ) && ( !game_over )
       puts "Bust! No more moves!"
     end
-
-    # Force game end
-    game_over = true
       
   end
 
